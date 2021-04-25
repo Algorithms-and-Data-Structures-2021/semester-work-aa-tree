@@ -76,11 +76,11 @@ https://drive.google.com/drive/folders/1cXU96JxD963AUfDVZU4DiMPw9EpWiGzg?usp=sha
 
 | Название                  | Описание                                | Метрики         |
 | :---                      | ---                                     | :---            |
-| `random_search_benchmark` | insert, search, delete                  | _время_         |
-| `add_benchmark`           |                                         | _время, память_ |
+| `benchmark` | insert, search, delete                  | _время_         |
 | ...                       | ...                                     | ...             |
 
 
 ## Источники
 https://neerc.ifmo.ru/wiki/index.php?title=AA-дерево
+
 https://en.wikipedia.org/wiki/AA_tree
