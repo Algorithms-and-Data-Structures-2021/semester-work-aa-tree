@@ -7,12 +7,6 @@ using namespace std;
 
 namespace itis {
 
-    // Tip 1: объявите здесь необходимые структуры, функции, константы и прочее
-
-    // Пример: объявление константы времени компиляции в заголовочном файле
-    inline constexpr auto kStringConstant = "Hello, stranger!";
-
-    // Пример: объявление структуры с полями и методами
     struct AATree {
     public:
         Node* root_{nullptr};
@@ -27,7 +21,6 @@ namespace itis {
         void IncreaseLevel(Node* current);
 
         void Print(Node* current);
-        void Print1(Node* current);
         void Balance(Node* temp);
         Node* Split(Node* temp);
         Node* Skew(Node* temp);

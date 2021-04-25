@@ -4,7 +4,6 @@
 
 namespace itis {
 
-    // здесь должны быть определения методов вашей структуры
     void AATree::Add(int value){
         auto node = new Node(value, nullptr, nullptr, nullptr, 1);
 
@@ -243,65 +242,6 @@ namespace itis {
         int value = one->value;
         one->value = two->value;
         two->value = value;
-        /* Node twoCopy = *two;
-        Node* parent = two->parent;
-
-        two->level = one->level;
-        if(one->parent == two){
-            one->parent = parent;
-            if(parent->left == two){
-                parent->left = one;
-            }
-            else{
-                parent->right = one;
-            }
-          two->parent = one;
-          two->left = one->left;
-          two->right = one->right;
-          if(two->right != nullptr) {
-            two->right->parent = two;
-          }
-
-          one->level = twoCopy.level;
-          one->parent = twoCopy.parent;
-          if(one->parent->left == two){
-            one->parent->left = one;
-          }
-          else{
-            one->parent->right = one;
-          }
-          one->left = twoCopy.left;
-          one->left->parent = one;
-          one->right = two;
-        }
-        else {
-          two->parent = one->parent;
-          two->parent->left = two;
-          two->left = one->left;
-          two->right = one->right;
-          if(two->right != nullptr) {
-            two->right->parent = two;
-          }
-
-          one->level = twoCopy.level;
-          one->parent = twoCopy.parent;
-          if(root_ != two) {
-              if (one->parent->left == two) {
-                  one->parent->left = one;
-              } else {
-                  one->parent->right = one;
-              }
-          }
-          else{
-              root_ = one;
-          }
-          one->left = twoCopy.left;
-          one->left->parent = one;
-          one->right = twoCopy.right;
-          one->right->parent = one;
-        }
-
-         */
     }
 
     void AATree::IncreaseLevel(Node *current) {
@@ -336,26 +276,6 @@ namespace itis {
         cout << endl;
         if(current->left != nullptr)Print(current->left);
         if(current->right != nullptr)Print(current->right);
-    }
-
-    void AATree::Print1(Node* current) {
-        if (current != nullptr) {
-            cout << "Level ";
-            cout << current->level;
-            cout << " | Value = ";
-            cout << current->value;
-            cout << " | Left ";
-            if (current->left != NULL) {
-                int left = current->left->value;
-                cout << left;
-            }
-            cout << " | Right ";
-            if (current->right != NULL) {
-                int right = current->right->value;
-                cout << right;
-            }
-            cout << endl;
-        }
     }
 
 }  // namespace itis

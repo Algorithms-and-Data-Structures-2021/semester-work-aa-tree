@@ -11,13 +11,13 @@
 using namespace std;
 using namespace itis;
 
-// абсолютный путь до набора данных и папки проекта
-static constexpr auto kDatasetPath = string_view{PROJECT_DATASET_DIR};
-static constexpr auto kProjectPath = string_view{PROJECT_SOURCE_DIR};
+//Путь к папке с наборами данных
+const string setsPath = "C:/Users/Admin/Desktop/Sets";
 
-const string setsPath = "C:/Users/EvveKiNG/Desktop/Sets";
-const string outputPath = "C:/Users/EvveKiNG/Desktop/results/";
+//Путь к папке, куда нужно выгрузить результаты
+const string outputPath = "C:/Users/Admin/Desktop/results/";
 
+//укажите названия папок с наборами данных
 string folders[10] = {"/01/",
                       "/02/",
                       "/03/",
@@ -25,6 +25,7 @@ string folders[10] = {"/01/",
                       "/07/", "/08/", "/09/",
                       "/10/"};
 
+//укажите названия файлов с наборами данных (без .csv)
 string files[14] = {"100", "500", "1000", "5000", "10000", "25000", "50000", "100000",
                     "250000", "500000", "750000", "1000000", "2500000", "5000000"};
 
