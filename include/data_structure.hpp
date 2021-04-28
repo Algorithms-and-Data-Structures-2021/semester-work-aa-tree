@@ -21,9 +21,11 @@ namespace itis {
         void IncreaseLevel(Node* current);
 
         void Print(Node* current);
+
         void Balance(Node* temp);
         Node* Split(Node* temp);
         Node* Skew(Node* temp);
+
         void Swap(Node* one, Node* two);
     };
 

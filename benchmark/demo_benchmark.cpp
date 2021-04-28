@@ -14,9 +14,6 @@ using namespace itis;
 //Путь к папке с наборами данных
 const string setsPath = "C:/Users/Admin/Desktop/Sets";
 
-//Путь к папке, куда нужно выгрузить результаты
-const string outputPath = "C:/Users/Admin/Desktop/results/";
-
 //укажите названия папок с наборами данных
 string folders[10] = {"/01/",
                       "/02/",
@@ -25,10 +22,15 @@ string folders[10] = {"/01/",
                       "/07/", "/08/", "/09/",
                       "/10/"};
 
+
 //укажите названия файлов с наборами данных (без .csv)
 string files[14] = {"100", "500", "1000", "5000", "10000", "25000", "50000", "100000",
                     "250000", "500000", "750000", "1000000", "2500000", "5000000"};
 
+//Путь к папке, куда нужно выгрузить результаты
+const string outputPath = "C:/Users/Admin/Desktop/results/";
+
+//Вывод результатов
 void writeResults(string file, long insert_time, long search_time, long delete_time){
     const auto output = string(outputPath);
     std::ofstream out(output + file + "/insert_result.txt", std::ios::app);
@@ -54,20 +56,17 @@ void writeResults(string file, long insert_time, long search_time, long delete_t
 }
 
 int main() {
-    // работа с набором данных
-    const auto path = string(setsPath);
     string line;
-    int c = 0;
     for (auto file : files) {
         for (auto folder : folders) {
             for (int i = 0; i < 10; i++) { // 10 раз прогоняем один и тот же csv файл
-                auto input_file_insert = ifstream(path + folder + file + ".csv");
-                auto input_file_search = ifstream(path + folder + file + ".csv");
-                auto input_file_delete = ifstream(path + folder + file + ".csv");
+                auto input_file_insert = ifstream(setsPath + folder + file + ".csv");
+                auto input_file_search = ifstream(setsPath + folder + file + ".csv");
+                auto input_file_delete = ifstream(setsPath + folder + file + ".csv");
 
                 AATree *tree = new AATree; // Создание структуры
 
-                // сам бенчмарк, в данном случае создание (добавление)
+                // добавление
                 auto time_point_before_insert = chrono::steady_clock::now();
                 while (getline(input_file_insert, line, ',')) {
                     tree->Add(stoi(line));
@@ -77,7 +76,7 @@ int main() {
                 long insert_time = chrono::duration_cast<chrono::nanoseconds>(time_diff_insert).count();
 
 
-                // сам бенчмарк, в данном случае создание (поиск)
+                // поиск
                 auto time_point_before_search = chrono::steady_clock::now();
                 while (getline(input_file_search, line, ',')) {
                     tree->Search(stoi(line));
@@ -87,18 +86,14 @@ int main() {
                 long search_time = chrono::duration_cast<chrono::nanoseconds>(time_diff_search).count();
 
 
-                // сам бенчмарк, в данном случае создание (удаление)
+                // удаление
                 auto time_point_before_delete = chrono::steady_clock::now();
                 while (getline(input_file_delete, line, ',')) {
-                    // cout << c << endl;
-                    // c++;
                     tree->Delete(stoi(line));
                 }
                 auto time_point_after_delete = chrono::steady_clock::now();
                 auto time_diff_delete = time_point_after_delete - time_point_before_delete;
                 long delete_time = chrono::duration_cast<chrono::nanoseconds>(time_diff_delete).count();
-
-
 
                 delete tree;
 
