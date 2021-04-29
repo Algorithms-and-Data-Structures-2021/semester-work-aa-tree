@@ -90,7 +90,7 @@ cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo && cmake --config RelWithDebInfo --bu
 2) Прогоняется добавление, удаление и поиск в дереве из N-элементов (сначала добавится, допустим, 100 элементов, а далее будет засекаться добавление, поиск и удаление нового элемента
 
 Результаты наших тестов:
-(ЗДЕСЬ)[https://drive.google.com/drive/folders/1cXU96JxD963AUfDVZU4DiMPw9EpWiGzg?usp=sharing]
+[ЗДЕСЬ(https://drive.google.com/drive/folders/1cXU96JxD963AUfDVZU4DiMPw9EpWiGzg?usp=sharing)
 
 ##### Список контрольных тестов
 
