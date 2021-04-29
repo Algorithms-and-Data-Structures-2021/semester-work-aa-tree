@@ -1,0 +1,1 @@
+Ознакомьтесь с инструкциями в benchmark/demo_benchmark.cpp
