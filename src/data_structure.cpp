@@ -1,50 +1,50 @@
-#include "data_structure.hpp"
+#include "data_structure.hpp";
 
 // файл с определениями
 
 namespace itis {
 
     //добавление
-    void AATree::Add(int value){
+    void AATree::Add(int value) {
         auto node = new Node(value, nullptr, nullptr, nullptr, 1);
 
         //если дерево пустое
-        if(root_ == nullptr){
+        if (root_ == nullptr) {
             root_ = node;
 
         }
         //дерево непустое
-        else{
-            Node* current = root_;
+        else {
+            Node *current = root_;
             bool isSet = false;
-            while(!isSet) {
+            while (!isSet) {
                 //если значение больше или равно значению текущего, то идем в правую ветку
-                if (value >= current->value){
+                if (value >= current->value) {
                     //если там пусто, то устанавливаем значение
-                    if(current->right == nullptr){
+                    if (current->right == nullptr) {
                         current->right = node;
-                        node->parent=current;
+                        node->parent = current;
                         Balance(current->right);
                         //установили, и цикл после этого прекратится
                         isSet = true;
                     }
-                    //иначе текущий элемент меняется на правого ребенка
-                    else{
+                        //иначе текущий элемент меняется на правого ребенка
+                    else {
                         current = current->right;
                     }
                 }
                 //если значение меньше значения текущего, то идем в левую ветку
-                if (value < current->value){
+                if (value < current->value) {
                     //если там пусто, то устанавливаем значение
-                    if(current->left == nullptr){
+                    if (current->left == nullptr) {
                         current->left = node;
-                        node->parent=current;
+                        node->parent = current;
                         Balance(current->left);
                         //установили, и цикл после этого прекратится
                         isSet = true;
                     }
-                    //иначе текущий элемент меняется на левого ребенка
-                    else{
+                        //иначе текущий элемент меняется на левого ребенка
+                    else {
                         current = current->left;
                     }
                 }
@@ -56,24 +56,21 @@ namespace itis {
     // устранение левого горизонтального ребра. Делаем правое вращение, чтобы заменить поддерево,
     // содержащее левую горизонтальную связь, на поддерево, содержащее разрешенную правую горизонтальную связь
     // https://neerc.ifmo.ru/wiki/images/9/93/Skew.png
-    Node* AATree::Skew(Node *parent)
-    {
+    Node *AATree::Skew(Node *parent) {
         if (parent->left != nullptr)
-            if (parent->left->level == parent->level)
-            {
+            if (parent->left->level == parent->level) {
                 Node *child = parent->left;
                 parent->left = child->right;
-                if(child->right != nullptr) {
+                if (child->right != nullptr) {
                     parent->left->parent = parent;
                 }
                 child->right = parent;
                 child->parent = parent->parent;
                 parent->parent = child;
-                if(child->parent != nullptr) {
-                    if(child->parent->left == parent) {
+                if (child->parent != nullptr) {
+                    if (child->parent->left == parent) {
                         child->parent->left = child;
-                    }
-                    else{
+                    } else {
                         child->parent->right = child;
                     }
                 }
@@ -86,24 +83,21 @@ namespace itis {
     //устранение двух последовательных правых горизонтальных ребер. Делаем левое вращение и увеличиваем уровень, чтобы заменить поддерево,
     //содержащее две или более последовательных правильных горизонтальных связи, на вершину, содержащую два поддерева с меньшим уровнем.
     //https://neerc.ifmo.ru/wiki/images/9/92/Split_rb.png
-    Node* AATree::Split(Node *grandparent)
-    {
-        if(grandparent->right!=nullptr && grandparent->right->right!=nullptr)
-            if(grandparent->level == grandparent->right->right->level)
-            {
+    Node *AATree::Split(Node *grandparent) {
+        if (grandparent->right != nullptr && grandparent->right->right != nullptr)
+            if (grandparent->level == grandparent->right->right->level) {
                 Node *parent = grandparent->right;
                 grandparent->right = parent->left;
-                if(grandparent->right != nullptr) {
+                if (grandparent->right != nullptr) {
                     grandparent->right->parent = grandparent;
                 }
                 parent->left = grandparent;
                 parent->parent = grandparent->parent;
                 grandparent->parent = parent;
-                if(parent->parent != nullptr) {
-                    if(parent->parent->left == grandparent) {
+                if (parent->parent != nullptr) {
+                    if (parent->parent->left == grandparent) {
                         parent->parent->left = parent;
-                    }
-                    else{
+                    } else {
                         parent->parent->right = parent;
                     }
                 }
@@ -117,19 +111,14 @@ namespace itis {
 
     //Балансировка дерева (вызываает split и skew)
     //Дерево таким способом "саморегулируется"
-    void AATree::Balance(Node* temp)
-    {
-        while(temp->parent != nullptr)
-        {
+    void AATree::Balance(Node *temp) {
+        while (temp->parent != nullptr) {
             temp = temp->parent;
-            if(temp == root_)
-            {
+            if (temp == root_) {
                 temp = Skew(temp);
                 temp = Split(temp);
                 root_ = temp;
-            }
-            else
-            {
+            } else {
                 temp = Skew(temp);
                 temp = Split(temp);
             }
@@ -140,9 +129,9 @@ namespace itis {
     //исходя из значения, которое ищем.
     //Если мы дойдем до конца дерева(листа) и так и не найдем элемент с нужным значением
     //метод вернет nullptr (т.е такого элемента в дереве нет)
-    Node* AATree::Search(int value) {
-        Node* current = root_;
-        while(true) {
+    Node *AATree::Search(int value) {
+        Node *current = root_;
+        while (true) {
             if (value == current->value) {
                 return current;
             } else if (value > current->value) {
@@ -164,10 +153,10 @@ namespace itis {
     //Удаление использвует поиск
     //сначала находим нужную вершину
     //потом рассматриваем четыре варианта удаления
-    void AATree::Delete(int value){
-        Node* current = Search(value);
+    void AATree::Delete(int value) {
+        Node *current = Search(value);
         //первый случай: удаляем листик (ничего сложного)
-        if(current->left == nullptr && current->right == nullptr) {
+        if (current->left == nullptr && current->right == nullptr) {
             if (root_ != current) {
                 Node *parent = current->parent;
                 if (parent->left == current) {
@@ -175,16 +164,15 @@ namespace itis {
                 } else {
                     parent->right = nullptr;
                 }
-            }
-            else{
+            } else {
                 root_ = nullptr;
             }
             delete current;
         }
-        //второй случай: слева - ничего, справа что-то есть
-        //удаляем элемент, а всю его правую ветку поднимаем на один уровень
-        else if(current->left == nullptr && current->right != nullptr){
-            if(root_ != current) {
+            //второй случай: слева - ничего, справа что-то есть
+            //удаляем элемент, а всю его правую ветку поднимаем на один уровень
+        else if (current->left == nullptr && current->right != nullptr) {
+            if (root_ != current) {
                 Node *parent = current->parent;
                 if (parent->left == current) {
                     parent->left = current->right;
@@ -196,17 +184,16 @@ namespace itis {
                 IncreaseLevel(current->parent->left);
                 IncreaseLevel(current->parent->right);
                 Balance(current->parent);
-            }
-            else{
+            } else {
                 root_ = current->right;
                 current->right->parent = nullptr;
             }
             delete current;
         }
-        //третий случай: справа - ничего, слева что-то есть
-        //удаляем элемент, а всю его левую ветку поднимаем на один уровень
-        else if(current->left != nullptr && current->right == nullptr){
-            if(root_ != current) {
+            //третий случай: справа - ничего, слева что-то есть
+            //удаляем элемент, а всю его левую ветку поднимаем на один уровень
+        else if (current->left != nullptr && current->right == nullptr) {
+            if (root_ != current) {
                 Node *parent = current->parent;
                 if (parent->left == current) {
                     parent->left = current->left;
@@ -217,21 +204,20 @@ namespace itis {
                 IncreaseLevel(current->parent->left);
                 IncreaseLevel(current->parent->right);
                 Balance(current->parent);
-            }
-            else{
+            } else {
                 root_ = current->left;
                 current->right->parent = nullptr;
             }
             delete current;
         }
-        //четвертый случай: и слева, и справа что-то есть
-        //сначала у правого потомка находим его самого левого потомка
-        //потом меняем его и удаляемный элемент местами
-        //далее мы вызывем перегруженный метод удаления, но уже без поиска элемента(тк мы знаем, где он находится)
-        //а там лишь два варианта (либо он листик, либо у него есть правый ребенок) с этими ситуациями мы уже умеем справляться
-        else{
-            Node* node = current->right;
-            while(node->left != nullptr){
+            //четвертый случай: и слева, и справа что-то есть
+            //сначала у правого потомка находим его самого левого потомка
+            //потом меняем его и удаляемный элемент местами
+            //далее мы вызывем перегруженный метод удаления, но уже без поиска элемента(тк мы знаем, где он находится)
+            //а там лишь два варианта (либо он листик, либо у него есть правый ребенок) с этими ситуациями мы уже умеем справляться
+        else {
+            Node *node = current->right;
+            while (node->left != nullptr) {
                 node = node->left;
             }
             Swap(node, current);
@@ -240,19 +226,17 @@ namespace itis {
     }
 
     //тот самый перегруженный метод удаления :D
-    void AATree::Delete(Node* current){
-        if(current->left == nullptr && current->right == nullptr){
-            Node* parent = current->parent;
-            if(parent->left == current){
+    void AATree::Delete(Node *current) {
+        if (current->left == nullptr && current->right == nullptr) {
+            Node *parent = current->parent;
+            if (parent->left == current) {
                 parent->left = nullptr;
-            }
-            else{
+            } else {
                 parent->right = nullptr;
             }
             delete current;
-        }
-        else if(current->left == nullptr && current->right != nullptr){
-            if(root_ != current) {
+        } else if (current->left == nullptr && current->right != nullptr) {
+            if (root_ != current) {
                 Node *parent = current->parent;
                 if (parent->left == current) {
                     parent->left = current->right;
@@ -264,8 +248,7 @@ namespace itis {
                 IncreaseLevel(current->parent->left);
                 IncreaseLevel(current->parent->right);
                 Balance(current->parent);
-            }
-            else{
+            } else {
                 root_ = current->right;
                 current->right->parent = nullptr;
             }
@@ -274,7 +257,7 @@ namespace itis {
     }
 
     //метод для смены местами элементов (мы его используем в четвертом варианте удаления)
-    void AATree::Swap(Node *one, Node *two){
+    void AATree::Swap(Node *one, Node *two) {
         int value = one->value;
         one->value = two->value;
         two->value = value;
@@ -282,7 +265,7 @@ namespace itis {
 
     //метод повышения уровня элемента
     void AATree::IncreaseLevel(Node *current) {
-        if(current!= nullptr) {
+        if (current != nullptr) {
             IncreaseLevel(current->left);
             IncreaseLevel(current->right);
             current->level++;
@@ -291,7 +274,7 @@ namespace itis {
     }
 
     //метод вывода дерева в виде списка элементов со значениями их параметров
-    void AATree::Print(Node* current) {
+    void AATree::Print(Node *current) {
         cout << "Level ";
         cout << current->level;
         cout << " | Value = ";
@@ -302,18 +285,18 @@ namespace itis {
             cout << left;
         }
         cout << " | Right ";
-        if (current->right != nullptr){
+        if (current->right != nullptr) {
             int right = current->right->value;
             cout << right;
         }
         cout << " | Parent ";
-        if (current->parent != nullptr){
+        if (current->parent != nullptr) {
             int parent = current->parent->value;
             cout << parent;
         }
         cout << endl;
-        if(current->left != nullptr)Print(current->left);
-        if(current->right != nullptr)Print(current->right);
+        if (current->left != nullptr)Print(current->left);
+        if (current->right != nullptr)Print(current->right);
     }
 
 }  // namespace itis
