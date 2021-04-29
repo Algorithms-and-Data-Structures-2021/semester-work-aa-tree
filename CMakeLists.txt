@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15 FATAL_ERROR)
 
 # Определите название вашего проекта (должно совпадать с названием репозитория).
 # Примечание: замените символ '-' на '_'.
-project(semester_work_template CXX)
+project(semester-work-aa-tree-fixiki CXX)
 
 # === Определение стандарта C++ для всего проекта ===
 
@@ -48,6 +48,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC include)
 add_subdirectory(dataset)
 add_subdirectory(examples)
 add_subdirectory(benchmark)
+
 
 # === main (target) ===
 add_executable(main main.cpp)
