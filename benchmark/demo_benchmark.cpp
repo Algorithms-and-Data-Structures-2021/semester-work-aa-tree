@@ -17,6 +17,8 @@ const string setsPath = "C:\\Users\\EvveKiNG\\CLionProjects\\semester-work-aa-tr
 //Путь к файлу с наборами данных для тестов добавления/поиска/удаления
 const string testPath = "C:\\Users\\EvveKiNG\\CLionProjects\\semester-work-aa-tree-fixiki\\dataset\\test.csv";
 
+// Сгенирировать наборы даннх : https://github.com/rthoor/generation.git
+
 
 //укажите названия папок с наборами данных, если они есть
 //string folders[10] = {"/01/","/02/","/03/","/04/","/05/",
