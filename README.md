@@ -96,7 +96,7 @@ cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo && cmake --config RelWithDebInfo --bu
 
 | Название                  | Описание                                | Метрики         |
 | :---                      | ---                                     | :---            |
-| `benchmark-demo` | insert, search, delete                  | _время_         |
+| `demo_benchmark.cpp` | insert, search, delete                  | _время_         |
 
 
 ## Источники
