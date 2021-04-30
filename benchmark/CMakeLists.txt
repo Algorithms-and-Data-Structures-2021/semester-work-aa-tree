@@ -1,5 +1,9 @@
 # Здесь вы можете создавать свои исполняемые файлы (executables)
-# исполянемый файл = генератор набора данных
+# исполянемый файл = контрольный тест
 
-# Пример создания генератора данных (исполняемого файла) под названием generate_csv_dataset.
-# Исходный код предоставлен в файле generate_csv_dataset.cpp текущей директории.
+# Пример создания контрольного теста (исполняемого файла) под названием demo_benchmark.
+# Исходный код предоставлен в файле demo_benchmark.cpp текущей директории.
+add_executable(demo_benchmark demo_benchmark.cpp)
+
+# Примечание: Не забываем подключить (прилинковать) библиотеку ${PROJECT_NAME} с реализацией структуры данных.
+target_link_libraries(demo_benchmark PRIVATE project_paths project_warnings ${PROJECT_NAME})
