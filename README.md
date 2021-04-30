@@ -79,7 +79,7 @@ cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo && cmake --config RelWithDebInfo --bu
 Генерация тестового набора данных в
 формате [comma-seperated values (CSV)](https://en.wikipedia.org/wiki/Comma-separated_values)
 
-1) Склонируйте проект генератора набора случайных чисел () к себе на устройство 
+1) Склонируйте проект генератора набора случайных чисел [ЗДЕСЬ](https://github.com/rthoor/generation.git) к себе на устройство 
 2) Ознакомьтесь с инструкциями генерации
 3) Сгенерируйте наборы данных
 
